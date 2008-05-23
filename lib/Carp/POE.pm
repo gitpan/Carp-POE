@@ -9,7 +9,7 @@ use base qw(Exporter);
 our @EXPORT      = qw(confess croak carp);
 our @EXPORT_OK   = qw(cluck verbose);
 our @EXPORT_FAIL = qw(verbose);
-our $VERSION     = '0.01';
+our $VERSION     = '0.02';
 
 # from POE::Session
 my ($file, $line) = (CALLER_FILE, CALLER_LINE);
@@ -19,31 +19,30 @@ sub confess     { die Carp::longmess(@_) . "\n" }
 sub cluck       { warn Carp::longmess(@_) . "\n" }
 
 sub croak {
-    if (_is_handler()) {
-        die "@_" . _caller() . "\n";
-    }
-    else {
-        die Carp::shortmess(@_) . "\n" if !_is_handler();
-    }
+    _is_handler()
+        ? die _caller_info(@_), "\n"
+        : die Carp::shortmess(@_), "\n"
+    ;
 }
 
 sub carp {
-    if (_is_handler()) {
-        warn "@_" . _caller() . "\n";
-    }
-    else {
-        warn Carp::shortmess(@_) . "\n" if !_is_handler();
-    }
+    _is_handler()
+        ? warn _caller_info(@_), "\n"
+        : warn Carp::shortmess(@_), "\n"
+    ;
 }
 
 sub _is_handler {
     return 1 if (caller(3))[0] eq 'POE::Kernel';
 }
 
-sub _caller {
-    package DB;
-    my @throw_away = caller(2);
-    return " at $DB::args[$file] line $DB::args[$line]";
+sub _caller_info {
+    my @args = @_;
+    {
+        package DB;
+        my @throw_away = caller(2);
+        return "@args at $DB::args[$file] line $DB::args[$line]";
+    }
 }
 
 1;
@@ -79,16 +78,20 @@ Carp::POE - Carp adapted to POE
 
 =head1 DESCRIPTION
 
-This module provides the same funcions as L<Carp|Carp>, but if they are
-called inside a POE event handler, the file/line names are replaced with
-POE::Session's C<$_[CALLER_FILE]> and C<$_[CALLER_LINE]>. This is useful
-as it will direct you to the code that posted the event instead of
-directing you to some subroutine in POE::Session which actually called
-the event handler.
+This module provides the same funcions as L<Carp|Carp>, but modifies
+the behavior of C<carp()> and C<croak> if called inside a POE event
+handler. The file/line names are replaced with POE::Session's
+C<$_[CALLER_FILE]> and C<$_[CALLER_LINE]>. This is useful as it will
+direct you to the code that posted the event instead of directing you to
+some subroutine in POE::Session which actually called the event handler.
 
-Calls to C<carp()> and friends in subroutines that are not POE event
+Calls to C<carp()> and C<croak> in subroutines that are not POE event
 handlers will not be effected, so it's always safe to C<use Carp::POE>
 instead of C<Carp>.
+
+=head1 TODO
+
+Do something clever with C<cluck> and C<confess>.
 
 =head1 BUGS
 

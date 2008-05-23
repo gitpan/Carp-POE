@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                Carp-POE
-version:             0.01
+version:             0.02
 abstract:            Carp adapted to POE
 license:             perl
 author:              
