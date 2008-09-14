@@ -9,6 +9,7 @@ WriteMakefile(
     LICENSE       => 'perl',
     PREREQ_PM     => {
         'Carp'          => '0',
+        'Exporter'      => '0',
         'POE::Session'  => '0',
     }
 );

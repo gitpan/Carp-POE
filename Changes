@@ -1,3 +1,7 @@
+0.05 Sun Sep 14 13:34:44 GMT 2008
+    - Pod fixes
+    - Added Exporter to depends
+
 0.03  Sat May 24 14:54:23 GMT 2008
     - Handle the unmodified functions with typeglobs
 
