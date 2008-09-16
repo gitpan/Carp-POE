@@ -4,4 +4,5 @@ INSTALL
 Changes
 lib/Carp/POE.pm
 t/00_basic.t
+t/01_warnings.t
 META.yml                                 Module meta-data (added by MakeMaker)

@@ -9,7 +9,7 @@ use base qw(Exporter);
 our @EXPORT      = qw(confess croak carp);
 our @EXPORT_OK   = qw(cluck verbose);
 our @EXPORT_FAIL = qw(verbose);
-our $VERSION     = '0.04';
+our $VERSION     = '0.05';
 
 # from POE::Session
 my ($file, $line) = (CALLER_FILE, CALLER_LINE);
@@ -80,11 +80,11 @@ Carp::POE - Carp adapted to POE
 
 This module provides the same functions as L<Carp|Carp>, but modifies
 the behavior of C<carp()> and C<croak()> if called inside a L<POE|POE>
-event handler. The file names/line numbers are replaced with
-L<POE::Session|POE::Session>'s C<$_[CALLER_FILE]> and C<$_[CALLER_LINE]>.
-This is useful as it will direct you to the code that posted the event
-instead of directing you to some subroutine in POE::Session which actually
-called the event handler.
+event handler. The file names/line numbers in the emitted warnings are
+replaced with L<POE::Session|POE::Session>'s C<$_[CALLER_FILE]> and
+C<$_[CALLER_LINE]>. This is useful as it will direct you to the code
+that posted the event instead of directing you to some subroutine in
+POE::Session which actually called the event handler.
 
 Calls to C<carp()> and C<croak()> in subroutines that are not POE event
 handlers will not be effected, so it's always safe to C<use Carp::POE>

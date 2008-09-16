@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                Carp-POE
-version:             0.04
+version:             0.05
 abstract:            Carp adapted to POE
 license:             perl
 author:              
@@ -10,7 +10,9 @@ distribution_type:   module
 requires:     
     Carp:                          0
     Exporter:                      0
-    POE::Session:                  0
+    POE:                           0
+    Test::More:                    0
+    Test::Warn:                    0
 meta-spec:
     url:     http://module-build.sourceforge.net/META-spec-v1.3.html
     version: 1.3

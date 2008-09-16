@@ -8,8 +8,10 @@ WriteMakefile(
     ABSTRACT_FROM => 'lib/Carp/POE.pm',
     LICENSE       => 'perl',
     PREREQ_PM     => {
-        'Carp'          => '0',
         'Exporter'      => '0',
-        'POE::Session'  => '0',
+        'Carp'          => '0',
+        'POE'           => '0',
+        'Test::More'    => '0',
+        'Test::Warn'    => '0',
     }
 );
