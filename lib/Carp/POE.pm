@@ -9,14 +9,17 @@ use base qw(Exporter);
 our @EXPORT      = qw(confess croak carp);
 our @EXPORT_OK   = qw(cluck verbose);
 our @EXPORT_FAIL = qw(verbose);
-our $VERSION     = '0.07';
+our $VERSION     = '0.08';
 
 # from POE::Session
 my ($file, $line) = (CALLER_FILE, CALLER_LINE);
 
-*export_fail = *Carp::export_fail;
-*confess     = *Carp::confess;
-*cluck       = *Carp::cluck;
+{
+    no warnings 'once';
+    *export_fail = *Carp::export_fail;
+    *confess     = *Carp::confess;
+    *cluck       = *Carp::cluck;
+}
 
 sub croak {
     _is_handler()
@@ -104,7 +107,7 @@ Hinrik E<Ouml>rn SigurE<eth>sson <hinrik.sig@gmail.com>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2008 Hinrik E<Ouml>rn SigurE<eth>sson
+Copyright 2008-2010 Hinrik E<Ouml>rn SigurE<eth>sson
 
 This program is free software, you can redistribute it and/or modify
 it under the same terms as Perl itself.
