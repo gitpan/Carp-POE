@@ -3,13 +3,11 @@ abstract: 'Carp adapted to POE'
 author:
   - 'Hinrik Örn Sigurðsson <hinrik.sig@gmail.com>'
 build_requires:
-  ExtUtils::MakeMaker: 6.42
-  Test::More: 0
   Test::Warn: 0.20
 configure_requires:
-  ExtUtils::MakeMaker: 6.42
-distribution_type: module
-generated_by: 'Module::Install version 0.91'
+  ExtUtils::MakeMaker: 6.31
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.101612, CPAN::Meta::Converter version 2.101670'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -17,17 +15,14 @@ meta-spec:
 name: Carp-POE
 no_index:
   directory:
-    - inc
     - t
+    - utils
 requires:
-  Carp: 0
-  Exporter: 0
   POE: 0
-  perl: 5.6.0
 resources:
-  Ratings: http://cpanratings.perl.org/d/Hailo
-  bugtracker: http://github.com/hinrik/hailo/issues
-  homepage: http://search.cpan.org/dist/Hailo
+  bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Carp-POE
+  homepage: http://search.cpan.org/dist/Carp-POE/
   license: http://dev.perl.org/licenses/
   repository: git://github.com/hinrik/carp-poe.git
-version: 0.08
+version: 0.09
+x_authority: cpan:HINRIK

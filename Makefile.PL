@@ -1,23 +1,53 @@
+
 use strict;
 use warnings;
-use inc::Module::Install '0.92';
 
-name         ('Carp-POE');
-perl_version ('5.006');
-author       ('Hinrik Örn Sigurðsson <hinrik.sig@gmail.com>');
-abstract_from('lib/Carp/POE.pm');
-version_from ('lib/Carp/POE.pm');
-license      ('perl');
-homepage     ('http://search.cpan.org/dist/Hailo');
-bugtracker   ('http://github.com/hinrik/hailo/issues');
-githubmeta   ();
-resources    (Ratings => 'http://cpanratings.perl.org/d/Hailo');
 
-requires     ('Exporter'   => '0');
-requires     ('Carp'       => '0');
-requires     ('POE'        => '0');
-test_requires('Test::More' => '0');
-test_requires('Test::Warn' => '0.20');
-tests_recursive();
 
-WriteAll();
+use ExtUtils::MakeMaker 6.31;
+
+
+
+my %WriteMakefileArgs = (
+  'ABSTRACT' => 'Carp adapted to POE',
+  'AUTHOR' => 'Hinrik Örn Sigurðsson <hinrik.sig@gmail.com>',
+  'BUILD_REQUIRES' => {
+    'Test::Warn' => '0.20'
+  },
+  'CONFIGURE_REQUIRES' => {
+    'ExtUtils::MakeMaker' => '6.31'
+  },
+  'DISTNAME' => 'Carp-POE',
+  'EXE_FILES' => [],
+  'LICENSE' => 'perl',
+  'NAME' => 'Carp::POE',
+  'PREREQ_PM' => {
+    'POE' => '0'
+  },
+  'VERSION' => '0.09',
+  'test' => {
+    'TESTS' => 't/*.t'
+  }
+);
+
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
+  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
+  my $pp = $WriteMakefileArgs{PREREQ_PM};
+  for my $mod ( keys %$br ) {
+    if ( exists $pp->{$mod} ) {
+      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod};
+    }
+    else {
+      $pp->{$mod} = $br->{$mod};
+    }
+  }
+}
+
+delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
+  unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
+
+WriteMakefile(%WriteMakefileArgs);
+
+
+
