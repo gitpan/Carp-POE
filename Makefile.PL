@@ -4,29 +4,29 @@ use warnings;
 
 
 
-use ExtUtils::MakeMaker 6.31;
+use ExtUtils::MakeMaker 6.30;
 
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'Carp adapted to POE',
-  'AUTHOR' => 'Hinrik Örn Sigurðsson <hinrik.sig@gmail.com>',
-  'BUILD_REQUIRES' => {
-    'Test::Warn' => '0.20'
+  "ABSTRACT" => "Carp adapted to POE",
+  "AUTHOR" => "Hinrik \303\226rn Sigur\303\260sson <hinrik.sig\@gmail.com>",
+  "BUILD_REQUIRES" => {
+    "Test::Warn" => "0.20"
   },
-  'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.31'
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
   },
-  'DISTNAME' => 'Carp-POE',
-  'EXE_FILES' => [],
-  'LICENSE' => 'perl',
-  'NAME' => 'Carp::POE',
-  'PREREQ_PM' => {
-    'POE' => '0'
+  "DISTNAME" => "Carp-POE",
+  "EXE_FILES" => [],
+  "LICENSE" => "perl",
+  "NAME" => "Carp::POE",
+  "PREREQ_PM" => {
+    "POE" => 0
   },
-  'VERSION' => '0.09',
-  'test' => {
-    'TESTS' => 't/*.t'
+  "VERSION" => "0.10",
+  "test" => {
+    "TESTS" => "t/*.t"
   }
 );
 

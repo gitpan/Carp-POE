@@ -2,8 +2,8 @@ package Carp::POE;
 BEGIN {
   $Carp::POE::AUTHORITY = 'cpan:HINRIK';
 }
-BEGIN {
-  $Carp::POE::VERSION = '0.09';
+{
+  $Carp::POE::VERSION = '0.10';
 }
 
 use strict;
@@ -47,13 +47,8 @@ sub _is_handler {
 sub _caller_info {
     my @args = @_;
     {
-        package DB;
-BEGIN {
-  $DB::AUTHORITY = 'cpan:HINRIK';
-}
-BEGIN {
-  $DB::VERSION = '0.09';
-}
+        package
+        DB;
         my @throw_away = caller(2);
         return "@args at $DB::args[$file] line $DB::args[$line]";
     }

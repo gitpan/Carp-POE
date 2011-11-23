@@ -6,7 +6,6 @@ META.json
 META.yml
 Makefile.PL
 README
-README.pod
 dist.ini
 lib/Carp/POE.pm
 t/00_basic.t
